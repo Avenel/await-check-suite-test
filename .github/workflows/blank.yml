@@ -34,6 +34,14 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+
+      - name: Determine target commit
+        id: get_target_commit
+        run: |
+          sha=$(git rev-parse HEAD)
+          echo "Target commit: $sha"
+          echo "sha=$sha" >> $GITHUB_OUTPUT
+          
       - name: Wait for check suites to complete
         uses: sap-contributions/await-check-suites@upgrade_to_node_20
         with:
